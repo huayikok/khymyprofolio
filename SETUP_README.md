@@ -19,6 +19,9 @@ npm install @mui/icons-material --force
 # 👇️ only if you use @mui/lab
 npm install @mui/lab --force
 
+# 👇️ only if you use zustand
+npm install zustand
+
 # ----------------------------------------------
 
 # 👇️ local run your project
