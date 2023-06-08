@@ -61,6 +61,30 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     ...theme.mixins.toolbar,
 }));
 
+const DrawerFooter = styled('div')(({ theme, open }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1201,
+    background: '#f0efef',
+    border: '1px solid #e0e0e0',
+    width: 'inherit',
+    ...(open && {
+        padding: theme.spacing(0, 1),
+    }),
+    ...(!open && {
+        padding: '0px 12px',
+    }),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+const DrawerFooterDivider = styled(Divider)(({ theme }) => ({
+    marginBottom: '63px'
+}));
+
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -102,15 +126,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-const DrawerFooter = styled(IconButton)(({ open }) => ({
-    ...(!open && {
-        right: 0,
-        position: 'absolute',
-        marginBottom: '35px',
-        marginRight: '15px',
-    }),
-}));
-
 export default function MiniDrawer() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -135,7 +150,7 @@ export default function MiniDrawer() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="fixed">
+            <AppBar position="fixed" elevation={0}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -159,7 +174,7 @@ export default function MiniDrawer() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    {['Inbox', 'Starred', 'Send email', 'Drafts', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -207,14 +222,12 @@ export default function MiniDrawer() {
                         </ListItem>
                     ))}
                 </List>
-                <List style={{ marginTop: `auto` }} >
-                    <ListItem>
-                        {open ?
-                            <DrawerFooter onClick={handleDrawerClose}><ChevronLeftIcon /></DrawerFooter> :
-                            <DrawerFooter onClick={handleDrawerOpen}><ChevronRightIcon /></DrawerFooter>
-                        }
-                    </ListItem>
-                </List>
+                <DrawerFooterDivider />
+                <DrawerFooter open={open}>
+                    <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
+                        {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                    </IconButton>
+                </DrawerFooter>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
