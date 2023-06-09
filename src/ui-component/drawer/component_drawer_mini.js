@@ -18,6 +18,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { } from '@fortawesome/free-solid-svg-icons'
 
 const drawerWidth = 240;
 
@@ -190,7 +192,8 @@ export default function MiniDrawer() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    {index % 2 === 0 ? <i class="fa-solid fa-layer-group"></i> : <MailIcon />}
+                                    {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
