@@ -53,3 +53,6 @@ npm run start
 
 # 👇️ build your project
 npm run build
+
+# 👇️ deploy your project to github hosting
+npm run deploy
