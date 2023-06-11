@@ -1,6 +1,6 @@
 const json = {
     navbar: {
-        title: '迷你变体抽屉 2'
+        title: 'ミニ バリアント ドロワー 2'
     },
     page: {
         landing: {
