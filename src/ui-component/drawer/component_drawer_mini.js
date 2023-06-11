@@ -20,8 +20,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLayerGroup } from '@fortawesome/free-solid-svg-icons'
-import { Autocomplete, TablePagination, TextField } from '@mui/material';
+import { Autocomplete, Container, TablePagination, TextField } from '@mui/material';
 import { useLocaleStore } from '../../store/locale';
+
+import logo from '../../logo.svg';
 
 const drawerWidth = 240;
 
@@ -55,39 +57,6 @@ const closedMixin = (theme, collapse) => ({
         width: `calc(${theme.spacing(8)} + 1px)`,
     },
 });
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-}));
-
-const DrawerFooter = styled('div')(({ theme, open }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    position: 'fixed',
-    bottom: 0,
-    zIndex: 1201,
-    background: '#f0efef',
-    border: '1px solid #e0e0e0',
-    width: 'inherit',
-    ...(open && {
-        padding: theme.spacing(0, 1),
-    }),
-    ...(!open && {
-        padding: '0px 12px',
-    }),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-}));
-
-const DrawerFooterDivider = styled(Divider)(({ theme }) => ({
-    marginBottom: '63px'
-}));
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -129,6 +98,57 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         }),
     }),
 );
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+const DrawerFooter = styled('div')(({ theme, open }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    position: 'fixed',
+    bottom: 0,
+    zIndex: 1201,
+    background: '#f0efef',
+    border: '1px solid #e0e0e0',
+    width: 'inherit',
+    ...(open && {
+        padding: theme.spacing(0, 1),
+    }),
+    ...(!open && {
+        padding: '0px 12px',
+    }),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
+const DrawerFooterDivider = styled(Divider)(({ theme }) => ({
+    marginBottom: '63px'
+}));
+
+const NavbarFooter = styled('footer')(({ theme, open, collapse }) => ({
+    padding: '12px',
+    background: 'rgb(240 239 239)',
+    borderTop: '1px solid #e0e0e0',
+    zIndex: 100,
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    maxWidth: '100%',
+    minHeight: '0px',
+    marginLeft: '-24px',
+    display: 'flex',
+}));
+
+const Space = styled('div')(({ theme, bottom }) => ({
+    marginBottom: bottom,
+}));
 
 export default function MiniDrawer() {
     const theme = useTheme();
@@ -231,7 +251,7 @@ export default function MiniDrawer() {
                     ))}
                 </List>
                 <DrawerFooterDivider />
-                <DrawerFooter open={open}>
+                <DrawerFooter open={open} sx={{ minHeight: '49px !important' }}>
                     <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
                         {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
@@ -265,9 +285,20 @@ export default function MiniDrawer() {
                 <Typography paragraph>
                     {translate.page.landing.content1}
                 </Typography>
+                <Space bottom={'30px'} />
                 <Typography paragraph>
                     {translate.page.landing.content2}
                 </Typography>
+                <Space bottom={'50px'} />
+                <NavbarFooter>
+                    <Container sx={{ marginLeft: '-25px' }}>Copyright © 2023, huayikok. All rights reserved.</Container>
+                    <Container sx={{ clear: 'both', display: 'inline-block', whiteSpace: 'nowrap' }}>
+                        <span style={{ right: 0, display: 'flex', position: 'fixed' }}>
+                            <Typography>Power by</Typography>
+                            <img src={logo} alt="Company Logo" width="50" style={{ margin: '-12px 5px -12px 0px' }} />
+                        </span>
+                    </Container>
+                </NavbarFooter>
             </Box>
         </Box >
     );
